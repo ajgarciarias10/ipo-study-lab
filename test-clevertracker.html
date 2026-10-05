@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es" data-tema="clevertracker">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caso Práctico · Generador de preguntas de CleverTracker</title>
+<script src="nav.js"></script>
+<link rel="stylesheet" href="estilo.css">
+<main>
+  <header>
+    <a href="index.html">← Laboratorio de estudio</a>
+    <p class="eyebrow">CASO PRÁCTICO · AUDITORÍA DE CLEVERTRACKER</p>
+    <h1>Generador de preguntas aleatorias</h1>
+    <p class="lead">Practica sin agobio ni exámenes rígidos: genera preguntas al azar de la auditoría en vivo de CleverTracker y comprueba al instante tu comprensión con feedback razonado.</p>
+  </header>
+
+  <!-- Barra de control y estadísticas en vivo -->
+  <div class="gen-bar">
+    <div class="gen-filters">
+      <label for="scope-selector" style="font-size:0.9rem; font-weight:600;">Categoría:</label>
+      <select id="scope-selector">
+        <option value="all">🎲 Todas las categorías (al azar)</option>
+        <option value="0">Acceso y Control del Usuario</option>
+        <option value="1">Rendimiento Percibido y CanvasKit</option>
+        <option value="2">Accesibilidad y Factores Sensoriales</option>
+        <option value="3">Modelo Mental y Persistencia</option>
+        <option value="4">Ergonomía, Gestalt y Fitts</option>
+      </select>
+    </div>
+    <div class="gen-stats">
+      <span class="streak-badge" title="Preguntas seguidas acertadas">🔥 Racha: <strong id="streak-val">0</strong></span>
+      <span class="badge ok">✓ <strong id="correct-val">0</strong></span>
+      <span class="badge wrong">✗ <strong id="wrong-val">0</strong></span>
+      <button id="btn-reset" class="btn-reset" title="Reiniciar marcador">↺ Reiniciar</button>
+    </div>
+  </div>
+
+  <!-- Tarjeta de la pregunta actual -->
+  <section class="card question-card" aria-label="Pregunta actual">
+    <div class="question-meta">
+      <span class="badge" id="gen-block-badge">Categoría</span>
+      <span class="badge" id="gen-ref-badge" style="background:var(--soft); color:var(--accent);">Referencia</span>
+      <div style="margin-left:auto;">
+        <label id="failed-box" class="inline" style="font-size:0.85rem; cursor:pointer;" hidden>
+          <input type="checkbox" id="filter-failed"> Priorizar fallos (<span id="failed-count">0</span>)
+        </label>
+      </div>
+    </div>
+
+    <h2 id="gen-prompt" style="font-size:1.22rem; margin:14px 0 18px; line-height:1.5;"></h2>
+
+    <div id="gen-banner" hidden></div>
+
+    <form id="gen-options" onsubmit="return false;" style="margin-top:16px;"></form>
+
+    <div class="gen-actions">
+      <button id="btn-next" class="btn-next-random" type="button">🎲 Siguiente pregunta aleatoria →</button>
+      <button id="btn-skip" class="btn-skip" type="button">Saltar / Otra pregunta ↻</button>
+      <span class="kbd-hint">Teclas: <kbd>1</kbd>-<kbd>4</kbd> responder · <kbd>Espacio</kbd> siguiente · <kbd>S</kbd> saltar</span>
+    </div>
+  </section>
+
+  <!-- Historial de la sesión -->
+  <details class="history-drawer">
+    <summary>Preguntas respondidas en esta sesión (<span id="history-count">0</span>) · Pulsa para repasar</summary>
+    <div class="history-drawer-content" id="history-list">
+      <p class="muted">Aún no has respondido ninguna pregunta en esta sesión.</p>
+    </div>
+  </details>
+
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-top:24px; flex-wrap:wrap; gap:12px;">
+    <a href="usabilidad-clevertracker.html" class="button secondary">Consultar informe completo de usabilidad →</a>
+    <a href="generador.html" class="button">Abrir generador global (170 preguntas) →</a>
+  </div>
+
+  <footer>
+    Basado en el <a href="usabilidad-clevertracker.html">Informe de Usabilidad de CleverTracker</a> y en <a href="../IPO2627.pdf" target="_blank" rel="noopener">IPO2627.pdf</a>.
+  </footer>
+  <noscript><p class="card">Activa JavaScript para realizar el test interactivo.</p></noscript>
+</main>
+<script src="preguntas-clevertracker.js"></script>
+<script src="test.js"></script>
+</html>
